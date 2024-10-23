@@ -85,10 +85,21 @@ public class Proj2 {
 
         long start, stop;
 
-        writeToFile("BST_Sorted_Insert", "./result.txt");
-
-        //counter variable
+        writeToFile("Trash", "./result.txt");
+        BST<SPY> trash = new BST<>();
         int n = 0;
+        start = System.nanoTime();
+        for(SPY s: Array) {
+            n++;
+            trash.insert(s);
+            stop = System.nanoTime();
+            Long  trash_insert = stop - start;
+            writeToFile(Long.toString(trash_insert) + ", " + Integer.toString(n), "./result.txt");
+        }
+
+        writeToFile("BST_Sorted_Insert", "./result.txt");
+        //counter variable
+        n = 0;
         start = System.nanoTime();
         for(SPY s: Array) {
             n++;

@@ -24,34 +24,22 @@ public class BST<T extends Comparable<T>> implements Iterable<T>{
     public boolean isEmpty(){ return this.root == null;}
     // Implement the insert method
     public void insert(T e){
+        root = Insert(root, e);
+    }
 
-        Node<T> Cur = this.root;
-        Node<T> Parent = null;
-        if (this.root == null) {
-            this.root = new Node<T>(e, null);
-            size++;
-            return;
+    public Node<T> Insert(Node<T> node, T data){
+        if(node == null)
+            return new Node<T>(data, null);
+
+        int cval = data.compareTo(node.getData());
+        if(cval < 0){
+            node.setLeft(Insert(node.getLeft(), data));
+        } else if (cval >0) {
+            node.setRight(Insert(node.getRight(), data));
         }
 
-        while(Cur != null) {
-            Parent = Cur;
-            if (e.compareTo(Cur.getData()) < 0) {
-                Cur = Cur.getLeft();
-            }else if (e.compareTo(Cur.getData()) > 0) {
-                Cur = Cur.getRight();
-            }else {
-                return;
-            }
-        }
+        return node;
 
-        Cur = Parent;
-
-        if(e.compareTo(Cur.getData()) < 0)
-            Cur.setLeft(new Node<T>(e, Cur));
-        else
-            Cur.setRight(new Node<T>(e, Cur));
-
-        this.size++;
     }
 
     // Implement the search method
